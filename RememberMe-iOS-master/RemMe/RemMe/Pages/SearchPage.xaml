@@ -1,19 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="RememberMe.Pages.SearchPage">
+             x:Class="RememberMe.Pages.SearchPage"
+             Title="Search Belongings">
 
   <StackLayout>
 
     <StackLayout Orientation="Horizontal" Padding="5">
       <Entry Text="{Binding Search, Mode=TwoWay}" HorizontalOptions="FillAndExpand"/>
-      <Button Text="Search" HorizontalOptions="End" Clicked="SearchClicked"/>
+      <Button Text="Search" HorizontalOptions="End" Clicked="SearchClicked" TextColor="#FF314A"/>
     </StackLayout>
 
-    <ListView ItemsSource="{Binding Items}" VerticalOptions="Fill">
+    <ListView ItemsSource="{Binding Items}" VerticalOptions="Fill" ItemTapped="OnItemTapped">
       <ListView.ItemTemplate>
         <DataTemplate>
-          <TextCell Text="{Binding Name}" Detail="{Binding Place}" />
+          <TextCell Text="{Binding Name}" Detail="{Binding Place}" DetailColor="#FF314A">
+            <TextCell.ContextActions>
+              <MenuItem Clicked="OnDeleteItem" Text="Delete" IsDestructive="True"/>
+            </TextCell.ContextActions>
+          </TextCell>
         </DataTemplate>
       </ListView.ItemTemplate>
     </ListView>
